@@ -4,33 +4,29 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title="Painel Financeiro", layout="wide")
 st.title("💹 Painel Financeiro Diário")
-st.markdown("🔓 Modo teste — sem autenticação")
+st.markdown("🔍 Visualização por setor com indicadores")
 
-tickers = ["VIVT3.SA", "ITUB4.SA", "VALE3.SA", "PETR4.SA"]
+# 🔢 Separação por setor
+setores = {
+    "🏦 Bancos": ["ITUB4.SA", "BBDC4.SA"],
+    "⚙️ Indústria / Commodities": ["VALE3.SA", "PETR4.SA"],
+    "📞 Telecom": ["VIVT3.SA"]
+}
 
-for ticker in tickers:
-    st.subheader(f"📈 {ticker}")
-    try:
-        dados = yf.Ticker(ticker)
-        hist = dados.history(period="1mo")
+# 📑 Abas por setor
+abas = st.tabs(list(setores.keys()))
 
-        if hist.empty:
-            st.warning(f"⚠️ Sem dados disponíveis para {ticker}")
-        else:
-            fig = go.Figure()
-            fig.add_trace(go.Scatter(
-                x=hist.index, y=hist['Close'],
-                name=ticker, line=dict(color='deepskyblue')
-            ))
-            fig.update_layout(
-                title=f"{ticker}",
-                template="plotly_dark",
-                margin=dict(l=30, r=30, t=30, b=30)
-            )
-            st.plotly_chart(fig, use_container_width=True)
-    except Exception as e:
-        st.error(f"Erro ao carregar {ticker}: {e}")
+# 📈 Renderizar cada aba
+for nome_setor, aba in zip(setores.keys(), abas):
+    with aba:
+        for ticker in setores[nome_setor]:
+            st.subheader(f"📊 {ticker}")
 
-st.markdown("---")
-st.markdown("💱 Câmbio hoje: Dólar R$ 5,54 | Euro R$ 6,48")
-st.markdown("📰 Fontes: [InfoMoney](https://www.infomoney.com.br/) | [Investing](https://br.investing.com/)")
+            try:
+                dados = yf.Ticker(ticker)
+                info = dados.info
+                hist = dados.history(period="1mo")
+
+                # 🎯 Indicadores extraídos
+                preco = info.get("currentPrice", "N/A")
+                pl = info.get("trailingPE", "N/A
