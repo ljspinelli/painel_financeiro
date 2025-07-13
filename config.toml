@@ -1,7 +1,7 @@
 [credentials]
 names = ["Lauro Finance"]
 usernames = ["lauro"]
-passwords = ["$2b$12$K8CbcfJZJv2gRUuUOSD5DOjCVoZCMTUXIMV0sY7ZfPbVmWZPz3p32"]  # Exemplo de senha criptografada (para "12345")
+passwords = ["$2b$12$K8CbcfJZJv2gRUuUOSD5DOjCVoZCMTUXIMV0sY7ZfPbVmWZPz3p32"]  # senha: 12345
 
 [cookie]
 name = "painel_cookie"
