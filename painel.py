@@ -15,10 +15,15 @@ for ticker in tickers:
     st.subheader(f"📈 {ticker}")
     dados = yf.Ticker(ticker)
     hist = dados.history(period="1mo")
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=hist.index, y=hist['Close'], name=ticker, line=dict(color='deepskyblue')))
-    fig.update_layout(template="plotly_dark", margin=dict(l=30, r=30, t=30, b=30))
-    st.plotly_chart(fig, use_container_width=True)
+
+    # Verificação de dados antes de traçar
+    if hist.empty:
+        st.warning(f"⚠️ Não foi possível carregar dados para {ticker}.")
+    else:
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=hist.index, y=hist['Close'], name=ticker, line=dict(color='deepskyblue')))
+        fig.update_layout(template="plotly_dark", margin=dict(l=30, r=30, t=30, b=30))
+        st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 st.markdown("💱 Dólar: R$ 5,54 | Euro: R$ 6,48")
