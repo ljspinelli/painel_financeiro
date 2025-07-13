@@ -1,0 +1,12 @@
+[credentials]
+names = ["Lauro Finance"]
+usernames = ["lauro"]
+passwords = ["$2b$12$K8CbcfJZJv2gRUuUOSD5DOjCVoZCMTUXIMV0sY7ZfPbVmWZPz3p32"] # exemplo de senha criptografada
+
+[cookie]
+name = "painel_cookie"
+key = "segredo_unico"
+expiry_days = 30
+
+[preauthorized]
+emails = ["lauro@email.com"]
