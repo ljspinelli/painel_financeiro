@@ -29,4 +29,4 @@ for nome_setor, aba in zip(setores.keys(), abas):
 
                 # 🎯 Indicadores extraídos
                 preco = info.get("currentPrice", "N/A")
-                pl = info.get("trailingPE", "N/A)
+                pl = info.get("trailingPE", "N/A")
