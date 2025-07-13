@@ -4,10 +4,10 @@ import yfinance as yf
 import plotly.graph_objects as go
 import toml
 
-# 🔐 Carregar configurações
+# 🔐 Carrega o config.toml
 config = toml.load("config.toml")
 
-# ✅ Autenticação segura com cookie
+# ✅ Autenticação corrigida (sem parâmetros nomeados)
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
@@ -15,23 +15,22 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days']
 )
 
-# 🧭 Tela de login
+# Tela de login
 name, auth_status, username = authenticator.login("Login", "main")
 
 if auth_status:
     authenticator.logout("Logout", "sidebar")
-    st.success(f"Bem-vindo ao Painel Financeiro, {name}! 📊")
+    st.success(f"Bem-vindo ao Painel Financeiro, {name}! 💹")
 
-    # 📈 Lista de ações monitoradas
     tickers = ["VIVT3.SA", "ITUB4.SA", "VALE3.SA", "PETR4.SA"]
 
     for ticker in tickers:
-        st.subheader(f"📉 {ticker}")
+        st.subheader(f"📈 {ticker}")
         dados = yf.Ticker(ticker)
         hist = dados.history(period="1mo")
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=hist.index, y=hist['Close'], name=ticker, line=dict(color='deepskyblue')))
-        fig.update_layout(template="plotly_dark", title=f"{ticker}", margin=dict(l=40, r=40, t=40, b=40))
+        fig.update_layout(template="plotly_dark", margin=dict(l=30, r=30, t=30, b=30))
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")
