@@ -1,0 +1,1 @@
+Bem-vindo ao Painel Financeiro Diário — uma aplicação interativa desenvolvida em Streamlit que exibe cotações de ações brasileiras, agrupadas por setor, com gráficos e indicadores úteis para análise rápida de mercado.
